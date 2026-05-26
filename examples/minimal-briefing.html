@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minimal Historical Bayesian Briefing</title>
+  <style>
+    :root { color-scheme: dark; --paper: #201b17; --ink: #f1e4c8; --muted: #b59f79; --line: #7c5f35; }
+    body { margin: 0; font-family: ui-serif, Georgia, serif; background: #14110f; color: var(--ink); }
+    main { max-width: 960px; margin: 0 auto; padding: 32px 20px 64px; }
+    nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 28px; }
+    a { color: #f0c36a; }
+    nav a { border: 1px solid var(--line); padding: 6px 10px; text-decoration: none; background: var(--paper); }
+    section { border: 1px solid var(--line); background: var(--paper); padding: 18px; margin: 18px 0; }
+    h1, h2 { letter-spacing: 0.02em; }
+    .bar { height: 10px; background: #3a3026; border: 1px solid var(--line); }
+    .bar > span { display: block; height: 100%; background: #d6a94d; }
+    code { color: #ffd98d; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p>synthetic example · no external dependencies</p>
+      <h1>Minimal Historical Bayesian Briefing</h1>
+      <p>A toy briefing about a fictional port-delay crisis. It exists only to exercise the verifier.</p>
+      <nav aria-label="Sections">
+        <a href="#outcomes">Outcomes</a>
+        <a href="#bayes">Bayes</a>
+        <a href="#flow">Flow</a>
+        <a href="#history">History</a>
+        <a href="#actors">Actors</a>
+        <a href="#triggers">Triggers</a>
+        <a href="#sources">Sources</a>
+      </nav>
+    </header>
+
+    <section id="outcomes">
+      <h2>Scenario outcomes</h2>
+      <p>Dominant scenario over 90 days: managed overtime settlement, 55%.</p>
+      <div class="bar" aria-label="55 percent"><span style="width:55%"></span></div>
+    </section>
+
+    <section id="bayes">
+      <h2>Bayesian workbench</h2>
+      <p>Toy model: <code>prior odds * LR(service criticality) * LR(public pressure)</code>.</p>
+      <script>
+        const BAYES_MODEL = { prior: 0.42, likelihoodRatios: [1.4, 1.2], posterior: 0.55 };
+      </script>
+    </section>
+
+    <section id="flow">
+      <h2>Causal flow</h2>
+      <p>Backlog shock → bottleneck labor leverage → allocator response → settlement or substitution.</p>
+    </section>
+
+    <section id="history">
+      <h2>Historical analogue deck</h2>
+      <p>Compare by mechanism: ports, rail junctions, and strategic workshops concentrate leverage when redundancy is weak.</p>
+    </section>
+
+    <section id="actors">
+      <h2>Actor map</h2>
+      <p>Port operators want throughput; crews want compensation; customers want predictable delivery; regulators want public continuity.</p>
+    </section>
+
+    <section id="triggers">
+      <h2>Update triggers</h2>
+      <p>Raise settlement odds if management publishes a funded compensation plan. Raise disruption odds if talks break down publicly.</p>
+    </section>
+
+    <section id="sources">
+      <h2>Sources and caveats</h2>
+      <p>This is a synthetic verification fixture, not an empirical claim.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/
+
+# Local agent scratch / private notes
+.superpowers/
+.hermes/
+.env
+.env.*
+
+# Generated local briefings unless intentionally curated
+out/
+dist/
