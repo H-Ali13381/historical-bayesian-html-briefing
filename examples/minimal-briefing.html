@@ -1,78 +1,274 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Minimal Historical Bayesian Briefing</title>
-  <style>
-    :root { color-scheme: dark; --paper: #201b17; --ink: #f1e4c8; --muted: #b59f79; --line: #7c5f35; }
-    body { margin: 0; font-family: ui-serif, Georgia, serif; background: #14110f; color: var(--ink); }
-    main { max-width: 960px; margin: 0 auto; padding: 32px 20px 64px; }
-    nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 28px; }
-    a { color: #f0c36a; }
-    nav a { border: 1px solid var(--line); padding: 6px 10px; text-decoration: none; background: var(--paper); }
-    section { border: 1px solid var(--line); background: var(--paper); padding: 18px; margin: 18px 0; }
-    h1, h2 { letter-spacing: 0.02em; }
-    .bar { height: 10px; background: #3a3026; border: 1px solid var(--line); }
-    .bar > span { display: block; height: 100%; background: #d6a94d; }
-    code { color: #ffd98d; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fictional Port Delay Crisis Forecast</title>
+<style>
+:root { --bg:#11100d; --paper:#eee5d2; --ink:#211b14; --muted:#766b5b; --line:#4a3f32; --accent:#b8792d; --red:#9a3f32; --green:#4c7a4f; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--paper); font:16px/1.55 ui-serif, Georgia, serif; }
+a { color:#f0b45c; }
+header { padding:48px 7vw 24px; border-bottom:1px solid #3a3027; background:linear-gradient(135deg,#17130f,#261d15); }
+nav { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
+nav a { text-decoration:none; border:1px solid #6d573d; padding:6px 10px; border-radius:999px; }
+main { width:min(1180px,92vw); margin:0 auto; }
+section { margin:28px 0; padding:24px; background:var(--paper); color:var(--ink); border:1px solid #c8b995; box-shadow:0 10px 30px #0005; }
+h1 { font-size:clamp(2rem,5vw,4.8rem); line-height:.95; margin:0; }
+h2 { margin-top:0; font-size:1.7rem; }
+.kicker { color:#e2a95e; text-transform:uppercase; letter-spacing:.12em; font-size:.82rem; }
+.metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-top:24px; }
+.metric { background:#1d1711; color:var(--paper); border:1px solid #584734; padding:16px; }
+.metric b { display:block; font-size:2rem; color:#f0b45c; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+.card { background:#fff8e9; border:1px solid #d2c29f; padding:16px; }
+.row { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+.bar { height:12px; background:#d8c8a8; margin:10px 0; overflow:hidden; }
+.bar i { display:block; height:100%; background:linear-gradient(90deg,var(--accent),#54351c); }
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:.92rem; }
+th,td { border-bottom:1px solid #d4c5a5; text-align:left; padding:8px; vertical-align:top; }
+pre { white-space:pre-wrap; background:#1b1712; color:#f2e6cc; padding:16px; overflow:auto; }
+.delta-pos { color:var(--green); } .delta-neg { color:var(--red); }
+.small { color:var(--muted); font-size:.92rem; }
+</style>
 </head>
 <body>
-  <main>
-    <header>
-      <p>synthetic example · no external dependencies</p>
-      <h1>Minimal Historical Bayesian Briefing</h1>
-      <p>A toy briefing about a fictional port-delay crisis. It exists only to exercise the verifier.</p>
-      <nav aria-label="Sections">
-        <a href="#outcomes">Outcomes</a>
-        <a href="#bayes">Bayes</a>
-        <a href="#flow">Flow</a>
-        <a href="#history">History</a>
-        <a href="#actors">Actors</a>
-        <a href="#triggers">Triggers</a>
-        <a href="#sources">Sources</a>
-      </nav>
-    </header>
+<header id="overview">
+  <div class="kicker">Hermes Forecast Ledger</div>
+  <h1>Fictional Port Delay Crisis Forecast</h1>
+  <p>Will the fictional North Quay port clear its cargo backlog by 2026-12-31?</p>
+  <nav>
+    <a href="#overview">Overview</a><a href="#outcomes">Outcomes</a><a href="#bayes">Bayes</a><a href="#flow">Flow</a><a href="#history">History</a><a href="#actors">Actors</a><a href="#triggers">Triggers</a><a href="#sources">Sources</a><a href="#ledger">Ledger</a>
+  </nav>
+  <div class="metrics">
+    <div class="metric"><span>Hermes probability</span><b>55.0%</b></div>
+    <div class="metric"><span>Market baseline</span><b>48.0%</b></div>
+    <div class="metric"><span>Delta</span><b class="delta-pos">7.0%</b></div>
+    <div class="metric"><span>Horizon</span><b>2026-12-31</b></div>
+  </div>
+  <p class="small">Forecasting analysis only; not financial advice. Status: draft.</p>
+</header>
+<main>
+<section id="outcomes"><h2>Outcomes</h2><div class="grid">
+      <article class="card scenario-card">
+        <div class="row"><strong>Backlog cleared</strong><span>55.0%</span></div>
+        <div class="bar"><i style="width:55.0%"></i></div>
+        <p>Overtime and routing changes reduce backlog below threshold.</p>
+      </article>
 
-    <section id="outcomes">
-      <h2>Scenario outcomes</h2>
-      <p>Dominant scenario over 90 days: managed overtime settlement, 55%.</p>
-      <div class="bar" aria-label="55 percent"><span style="width:55%"></span></div>
-    </section>
-
-    <section id="bayes">
-      <h2>Bayesian workbench</h2>
-      <p>Toy model: <code>prior odds * LR(service criticality) * LR(public pressure)</code>.</p>
-      <script>
-        const BAYES_MODEL = { prior: 0.42, likelihoodRatios: [1.4, 1.2], posterior: 0.55 };
-      </script>
-    </section>
-
-    <section id="flow">
-      <h2>Causal flow</h2>
-      <p>Backlog shock → bottleneck labor leverage → allocator response → settlement or substitution.</p>
-    </section>
-
-    <section id="history">
-      <h2>Historical analogue deck</h2>
-      <p>Compare by mechanism: ports, rail junctions, and strategic workshops concentrate leverage when redundancy is weak.</p>
-    </section>
-
-    <section id="actors">
-      <h2>Actor map</h2>
-      <p>Port operators want throughput; crews want compensation; customers want predictable delivery; regulators want public continuity.</p>
-    </section>
-
-    <section id="triggers">
-      <h2>Update triggers</h2>
-      <p>Raise settlement odds if management publishes a funded compensation plan. Raise disruption odds if talks break down publicly.</p>
-    </section>
-
-    <section id="sources">
-      <h2>Sources and caveats</h2>
-      <p>This is a synthetic verification fixture, not an empirical claim.</p>
-    </section>
-  </main>
+      <article class="card scenario-card">
+        <div class="row"><strong>Backlog persists</strong><span>45.0%</span></div>
+        <div class="bar"><i style="width:45.0%"></i></div>
+        <p>Capacity bottlenecks remain binding into the resolution window.</p>
+      </article></div></section>
+<section id="bayes"><h2>Bayesian Workbench</h2><p>The toy posterior combines a smoothed outside-view rate with two explicit evidence pushes: funded overtime raises odds while chokepoint fragility lowers them.</p><h3>Priors</h3><table><tr><th>Name</th><th>k/n</th><th>Base rate</th><th>Notes</th></tr><tr><td>Comparable logistics disruptions</td><td>5/12</td><td>42.0%</td><td>Synthetic base-rate row used only for tests.</td></tr></table><h3>Evidence</h3><table><tr><th>Claim</th><th>Direction</th><th>LR</th><th>Source</th></tr><tr><td>Emergency overtime plan funded</td><td>up</td><td>1.35</td><td>synthetic memo</td></tr><tr><td>Single chokepoint remains capacity-constrained</td><td>down</td><td>0.85</td><td>synthetic operations note</td></tr></table></section>
+<section id="flow"><h2>Causal Flow</h2><p>Backlog shock → temporary overtime funding → increased clearance capacity; the remaining chokepoint limits throughput, keeping confidence moderate.</p></section>
+<section id="history"><h2>Reference Classes / Historical Analogues</h2><p>Mechanism match: logistics bottlenecks where a narrow labor or equipment constraint controls system recovery. Mapping limit: this fixture is fictional and not an empirical claim.</p></section>
+<section id="actors"><h2>Actors and Incentives</h2><p>Port operators want throughput, crews want compensation, shippers want predictability, and regulators want visible continuity. Each actor can shift the forecast by changing capacity or settlement credibility.</p></section>
+<section id="triggers"><h2>Update Triggers</h2><p>Raise odds if weekly backlog reports fall for three consecutive periods; lower odds if overtime funding lapses or the chokepoint reports new outages.</p></section>
+<section id="sources"><h2>Sources and Caveats</h2><ul><li>Resolution source: <a href="https://example.com/fictional-resolution-source">https://example.com/fictional-resolution-source</a></li><li>Market: <a href="https://example.com/fictional-market">https://example.com/fictional-market</a></li></ul><p>Resolves YES if the fictional port authority reports backlog below normal operating threshold by 23:59 UTC on 2026-12-31; resolves NO otherwise; void if the source stops reporting the metric.</p></section>
+<section id="ledger"><h2>Update Ledger</h2><table><tr><th>Version</th><th>Timestamp</th><th>Hermes</th><th>Market</th><th>Rationale</th></tr><tr><td>v001</td><td>2026-06-01T00:00:00Z</td><td>55.0%</td><td>48.0%</td><td>Synthetic initial forecast: funded overtime raises clearance odds, but chokepoint fragility keeps the forecast below high confidence.</td></tr></table><details><summary>Embedded JSON</summary><pre>{
+  &quot;schema_version&quot;: &quot;1.0&quot;,
+  &quot;forecast_id&quot;: &quot;fictional-port-delay-crisis&quot;,
+  &quot;title&quot;: &quot;Fictional Port Delay Crisis Forecast&quot;,
+  &quot;question&quot;: &quot;Will the fictional North Quay port clear its cargo backlog by 2026-12-31?&quot;,
+  &quot;outcome_type&quot;: &quot;binary&quot;,
+  &quot;horizon_start&quot;: &quot;2026-06-01&quot;,
+  &quot;horizon_end&quot;: &quot;2026-12-31&quot;,
+  &quot;resolution_source&quot;: &quot;https://example.com/fictional-resolution-source&quot;,
+  &quot;resolution_rule&quot;: &quot;Resolves YES if the fictional port authority reports backlog below normal operating threshold by 23:59 UTC on 2026-12-31; resolves NO otherwise; void if the source stops reporting the metric.&quot;,
+  &quot;status&quot;: &quot;draft&quot;,
+  &quot;probability_current&quot;: 0.55,
+  &quot;baselines&quot;: {
+    &quot;market&quot;: {
+      &quot;platform&quot;: &quot;ExampleMarket&quot;,
+      &quot;url&quot;: &quot;https://example.com/fictional-market&quot;,
+      &quot;probability&quot;: 0.48,
+      &quot;timestamp&quot;: &quot;2026-06-01T00:00:00Z&quot;,
+      &quot;liquidity&quot;: null,
+      &quot;volume&quot;: null,
+      &quot;notes&quot;: &quot;Synthetic baseline for package validation only.&quot;
+    },
+    &quot;naive&quot;: {
+      &quot;probability&quot;: 0.5
+    },
+    &quot;base_rate&quot;: {
+      &quot;probability&quot;: 0.42,
+      &quot;notes&quot;: &quot;Toy outside-view rate from synthetic past port-delay cases.&quot;
+    }
+  },
+  &quot;priors&quot;: [
+    {
+      &quot;name&quot;: &quot;Comparable logistics disruptions&quot;,
+      &quot;k&quot;: 5,
+      &quot;n&quot;: 12,
+      &quot;base_rate&quot;: 0.42,
+      &quot;notes&quot;: &quot;Synthetic base-rate row used only for tests.&quot;
+    }
+  ],
+  &quot;evidence&quot;: [
+    {
+      &quot;claim&quot;: &quot;Emergency overtime plan funded&quot;,
+      &quot;direction&quot;: &quot;up&quot;,
+      &quot;lr&quot;: 1.35,
+      &quot;source&quot;: &quot;synthetic memo&quot;
+    },
+    {
+      &quot;claim&quot;: &quot;Single chokepoint remains capacity-constrained&quot;,
+      &quot;direction&quot;: &quot;down&quot;,
+      &quot;lr&quot;: 0.85,
+      &quot;source&quot;: &quot;synthetic operations note&quot;
+    }
+  ],
+  &quot;scenarios&quot;: [
+    {
+      &quot;name&quot;: &quot;Backlog cleared&quot;,
+      &quot;probability&quot;: 0.55,
+      &quot;description&quot;: &quot;Overtime and routing changes reduce backlog below threshold.&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Backlog persists&quot;,
+      &quot;probability&quot;: 0.45,
+      &quot;description&quot;: &quot;Capacity bottlenecks remain binding into the resolution window.&quot;
+    }
+  ],
+  &quot;updates&quot;: [
+    {
+      &quot;version_id&quot;: &quot;v001&quot;,
+      &quot;timestamp&quot;: &quot;2026-06-01T00:00:00Z&quot;,
+      &quot;probability&quot;: 0.55,
+      &quot;probability_before&quot;: null,
+      &quot;probability_after&quot;: 0.55,
+      &quot;market_probability&quot;: 0.48,
+      &quot;rationale&quot;: &quot;Synthetic initial forecast: funded overtime raises clearance odds, but chokepoint fragility keeps the forecast below high confidence.&quot;,
+      &quot;sources_checked&quot;: [
+        &quot;synthetic authority bulletin&quot;,
+        &quot;synthetic operations note&quot;
+      ],
+      &quot;evidence_delta&quot;: [
+        &quot;overtime plan +&quot;,
+        &quot;capacity chokepoint -&quot;
+      ],
+      &quot;model&quot;: &quot;toy base-rate plus likelihood-ratio update&quot;,
+      &quot;human_approved&quot;: false
+    }
+  ],
+  &quot;scoring&quot;: {
+    &quot;primary&quot;: &quot;brier&quot;,
+    &quot;secondary&quot;: &quot;log_score&quot;,
+    &quot;baselines&quot;: [
+      &quot;market&quot;,
+      &quot;base_rate&quot;,
+      &quot;naive_50&quot;
+    ],
+    &quot;outcome&quot;: null,
+    &quot;resolved_at&quot;: null,
+    &quot;brier&quot;: null,
+    &quot;log_score&quot;: null
+  },
+  &quot;public_notes&quot;: &quot;Synthetic package fixture for validation only. Forecasting analysis only; not financial advice.&quot;
+}</pre></details></section>
+</main>
+<script id="forecast-data" type="application/json">{
+  "schema_version": "1.0",
+  "forecast_id": "fictional-port-delay-crisis",
+  "title": "Fictional Port Delay Crisis Forecast",
+  "question": "Will the fictional North Quay port clear its cargo backlog by 2026-12-31?",
+  "outcome_type": "binary",
+  "horizon_start": "2026-06-01",
+  "horizon_end": "2026-12-31",
+  "resolution_source": "https://example.com/fictional-resolution-source",
+  "resolution_rule": "Resolves YES if the fictional port authority reports backlog below normal operating threshold by 23:59 UTC on 2026-12-31; resolves NO otherwise; void if the source stops reporting the metric.",
+  "status": "draft",
+  "probability_current": 0.55,
+  "baselines": {
+    "market": {
+      "platform": "ExampleMarket",
+      "url": "https://example.com/fictional-market",
+      "probability": 0.48,
+      "timestamp": "2026-06-01T00:00:00Z",
+      "liquidity": null,
+      "volume": null,
+      "notes": "Synthetic baseline for package validation only."
+    },
+    "naive": {
+      "probability": 0.5
+    },
+    "base_rate": {
+      "probability": 0.42,
+      "notes": "Toy outside-view rate from synthetic past port-delay cases."
+    }
+  },
+  "priors": [
+    {
+      "name": "Comparable logistics disruptions",
+      "k": 5,
+      "n": 12,
+      "base_rate": 0.42,
+      "notes": "Synthetic base-rate row used only for tests."
+    }
+  ],
+  "evidence": [
+    {
+      "claim": "Emergency overtime plan funded",
+      "direction": "up",
+      "lr": 1.35,
+      "source": "synthetic memo"
+    },
+    {
+      "claim": "Single chokepoint remains capacity-constrained",
+      "direction": "down",
+      "lr": 0.85,
+      "source": "synthetic operations note"
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "Backlog cleared",
+      "probability": 0.55,
+      "description": "Overtime and routing changes reduce backlog below threshold."
+    },
+    {
+      "name": "Backlog persists",
+      "probability": 0.45,
+      "description": "Capacity bottlenecks remain binding into the resolution window."
+    }
+  ],
+  "updates": [
+    {
+      "version_id": "v001",
+      "timestamp": "2026-06-01T00:00:00Z",
+      "probability": 0.55,
+      "probability_before": null,
+      "probability_after": 0.55,
+      "market_probability": 0.48,
+      "rationale": "Synthetic initial forecast: funded overtime raises clearance odds, but chokepoint fragility keeps the forecast below high confidence.",
+      "sources_checked": [
+        "synthetic authority bulletin",
+        "synthetic operations note"
+      ],
+      "evidence_delta": [
+        "overtime plan +",
+        "capacity chokepoint -"
+      ],
+      "model": "toy base-rate plus likelihood-ratio update",
+      "human_approved": false
+    }
+  ],
+  "scoring": {
+    "primary": "brier",
+    "secondary": "log_score",
+    "baselines": [
+      "market",
+      "base_rate",
+      "naive_50"
+    ],
+    "outcome": null,
+    "resolved_at": null,
+    "brier": null,
+    "log_score": null
+  },
+  "public_notes": "Synthetic package fixture for validation only. Forecasting analysis only; not financial advice."
+}</script>
 </body>
 </html>

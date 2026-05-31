@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "forecast_id": "example-market-question",
+  "title": "Example forecast",
+  "question": "Will the specified event happen by 2026-12-31?",
+  "outcome_type": "binary",
+  "horizon_start": "2026-05-29",
+  "horizon_end": "2026-12-31",
+  "resolution_source": "https://example.com/resolution-source",
+  "resolution_rule": "Resolves YES if the specified source confirms the event by 23:59 UTC on the horizon date; resolves NO otherwise; void if the source changes criteria materially.",
+  "status": "draft",
+  "probability_current": 0.42,
+  "baselines": {
+    "market": {
+      "platform": "Polymarket",
+      "url": "https://polymarket.com/event/example",
+      "probability": 0.31,
+      "timestamp": "2026-05-29T00:00:00Z",
+      "liquidity": null,
+      "volume": null,
+      "notes": "Verify market wording matches forecast question."
+    },
+    "naive": {"probability": 0.5},
+    "base_rate": {"probability": 0.2857, "notes": "Smoothed 3/12 reference class."}
+  },
+  "priors": [
+    {"name": "Reference class", "k": 3, "n": 12, "base_rate": 0.2857, "source": "...", "notes": "..."}
+  ],
+  "evidence": [
+    {"claim": "New evidence item", "direction": "up", "lr": 1.25, "source": "...", "notes": "..."}
+  ],
+  "scenarios": [
+    {"name": "Baseline continuation", "probability": 0.58, "description": "..."},
+    {"name": "Breakout/disruption", "probability": 0.42, "description": "..."}
+  ],
+  "updates": [
+    {
+      "version_id": "v001",
+      "timestamp": "2026-05-29T00:00:00Z",
+      "probability": 0.42,
+      "probability_before": null,
+      "probability_after": 0.42,
+      "market_probability": 0.31,
+      "rationale": "Initial forecast after outside-view/base-rate pass.",
+      "sources_checked": [],
+      "evidence_delta": [],
+      "model": null,
+      "human_approved": false
+    }
+  ],
+  "scoring": {
+    "primary": "brier",
+    "secondary": "log_score",
+    "baselines": ["market", "base_rate", "naive_50"],
+    "outcome": null,
+    "resolved_at": null,
+    "brier": null,
+    "log_score": null
+  },
+  "public_notes": "Forecasting analysis only; not financial advice."
+}

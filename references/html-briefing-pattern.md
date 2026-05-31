@@ -1,46 +1,18 @@
 # HTML Briefing Pattern
 
-Use this checklist when turning a historical and Bayesian analysis into a self-contained HTML document.
+This compatibility note preserves the old reference path.
 
-## Required Sections
+For new forecast artifacts, use `references/04-html-briefing-pattern.md`. The newer workflow is ledger-first: validate `forecast.json`, generate the first HTML shell with `scripts/render_forecast_html.py`, hand-polish generated placeholder sections, then verify with `scripts/verify_html_briefing.py`.
 
-- **Hero / thesis**: one-line frame, headline probabilities, scope caveat.
-- **Scenario selector**: mutually exclusive dominant outcomes for a stated horizon.
-- **Event probabilities**: overlapping probabilities that do not sum to 100%.
-- **Bayesian workbench**: formula, priors, likelihood ratios, toggles, or a visible model table.
-- **Causal flow**: system map from stressor to legitimacy break, bottleneck response, and outcomes.
-- **Historical analogue deck**: cases filtered by mechanism, not era or aesthetic similarity.
-- **Actor map**: each faction's claim, leverage, likely tactics, and constraints.
-- **Update triggers**: what new evidence would move probabilities and by how much.
-- **Sources and caveats**: original sources, local notes if safe to cite, and model limitations.
+Minimum required IDs for generated pages:
 
-## Design Direction
+```text
+overview,outcomes,bayes,flow,history,actors,triggers,sources,ledger
+```
 
-Prefer a distinctive context-native aesthetic: archival dossier, industrial field report, annotated map, court ledger, machine-room schematic, or war-room briefing.
+Verification command:
 
-Avoid:
-
-- generic SaaS cards;
-- purple/neon gradient defaults;
-- excessive centered hero sections;
-- external CDN dependencies unless requested;
-- decorative historical references that do not carry causal meaning.
-
-## Interaction Ideas
-
-- Scenario buttons update a detail pane.
-- Evidence toggles recalculate normalized scenario odds.
-- SVG flow nodes update explanatory text.
-- Case chips filter historical analogues.
-- Details/summary blocks reveal update rules.
-- Source cards distinguish direct claims, corroborated facts, and inference.
-
-## Verification Checklist
-
-- HTML file exists and is nonzero.
-- Navigation anchors resolve to actual IDs.
-- Required interactive IDs exist.
-- No accidental external `src=` dependencies.
-- External `href=` references are intentional and listed in sources.
-- Local relative links point to files that exist, or are removed before publication.
-- Static verification output is recorded before claiming completion.
+```bash
+SKILL_DIR="${SKILL_DIR:-$HOME/.hermes/skills/research/historical-bayesian-html-briefing}"
+python "$SKILL_DIR/scripts/verify_html_briefing.py" forecast.html --ids overview,outcomes,bayes,flow,history,actors,triggers,sources,ledger --require-forecast-data
+```

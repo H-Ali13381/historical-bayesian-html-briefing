@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Hermes Forecast Ledger",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "forecast_id",
+    "question",
+    "outcome_type",
+    "horizon_start",
+    "horizon_end",
+    "resolution_source",
+    "resolution_rule",
+    "status",
+    "updates"
+  ],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "forecast_id": {"type": "string"},
+    "title": {"type": "string"},
+    "question": {"type": "string"},
+    "outcome_type": {"enum": ["binary", "multiway", "numeric-range"]},
+    "horizon_start": {"type": "string"},
+    "horizon_end": {"type": "string"},
+    "resolution_source": {"type": "string"},
+    "resolution_rule": {"type": "string"},
+    "status": {"enum": ["draft", "active", "frozen", "resolved", "voided"]},
+    "probability_current": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "baselines": {"type": "object"},
+    "priors": {"type": "array"},
+    "evidence": {"type": "array"},
+    "scenarios": {"type": "array"},
+    "updates": {"type": "array"},
+    "scoring": {"type": "object"},
+    "public_notes": {"type": "string"}
+  }
+}

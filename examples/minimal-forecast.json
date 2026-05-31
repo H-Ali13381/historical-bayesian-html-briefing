@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "forecast_id": "fictional-port-delay-crisis",
+  "title": "Fictional Port Delay Crisis Forecast",
+  "question": "Will the fictional North Quay port clear its cargo backlog by 2026-12-31?",
+  "outcome_type": "binary",
+  "horizon_start": "2026-06-01",
+  "horizon_end": "2026-12-31",
+  "resolution_source": "https://example.com/fictional-resolution-source",
+  "resolution_rule": "Resolves YES if the fictional port authority reports backlog below normal operating threshold by 23:59 UTC on 2026-12-31; resolves NO otherwise; void if the source stops reporting the metric.",
+  "status": "draft",
+  "probability_current": 0.55,
+  "baselines": {
+    "market": {
+      "platform": "ExampleMarket",
+      "url": "https://example.com/fictional-market",
+      "probability": 0.48,
+      "timestamp": "2026-06-01T00:00:00Z",
+      "liquidity": null,
+      "volume": null,
+      "notes": "Synthetic baseline for package validation only."
+    },
+    "naive": {
+      "probability": 0.5
+    },
+    "base_rate": {
+      "probability": 0.42,
+      "notes": "Toy outside-view rate from synthetic past port-delay cases."
+    }
+  },
+  "priors": [
+    {
+      "name": "Comparable logistics disruptions",
+      "k": 5,
+      "n": 12,
+      "base_rate": 0.42,
+      "notes": "Synthetic base-rate row used only for tests."
+    }
+  ],
+  "evidence": [
+    {
+      "claim": "Emergency overtime plan funded",
+      "direction": "up",
+      "lr": 1.35,
+      "source": "synthetic memo"
+    },
+    {
+      "claim": "Single chokepoint remains capacity-constrained",
+      "direction": "down",
+      "lr": 0.85,
+      "source": "synthetic operations note"
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "Backlog cleared",
+      "probability": 0.55,
+      "description": "Overtime and routing changes reduce backlog below threshold."
+    },
+    {
+      "name": "Backlog persists",
+      "probability": 0.45,
+      "description": "Capacity bottlenecks remain binding into the resolution window."
+    }
+  ],
+  "updates": [
+    {
+      "version_id": "v001",
+      "timestamp": "2026-06-01T00:00:00Z",
+      "probability": 0.55,
+      "probability_before": null,
+      "probability_after": 0.55,
+      "market_probability": 0.48,
+      "rationale": "Synthetic initial forecast: funded overtime raises clearance odds, but chokepoint fragility keeps the forecast below high confidence.",
+      "sources_checked": [
+        "synthetic authority bulletin",
+        "synthetic operations note"
+      ],
+      "evidence_delta": [
+        "overtime plan +",
+        "capacity chokepoint -"
+      ],
+      "model": "toy base-rate plus likelihood-ratio update",
+      "human_approved": false
+    }
+  ],
+  "scoring": {
+    "primary": "brier",
+    "secondary": "log_score",
+    "baselines": [
+      "market",
+      "base_rate",
+      "naive_50"
+    ],
+    "outcome": null,
+    "resolved_at": null,
+    "brier": null,
+    "log_score": null
+  },
+  "public_notes": "Synthetic package fixture for validation only. Forecasting analysis only; not financial advice."
+}

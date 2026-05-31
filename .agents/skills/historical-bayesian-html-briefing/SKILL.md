@@ -1,204 +1,88 @@
 ---
 name: historical-bayesian-html-briefing
-description: Use when a user wants a historically grounded deep dive that combines mechanism-based analogies, explicit probabilistic outcome forecasting, Bayesian updates, scenario odds, or a self-contained interactive HTML briefing for a complex social, technical, economic, or geopolitical system.
-version: 1.0.0
+description: "Use when a user wants a serious historically grounded probabilistic forecast, Bayesian/Tetlock-style scenario odds, market deltas, forecast ledgers, crisis/strategy forecasts, or a shareable self-contained HTML briefing for complex social, technical, economic, geopolitical, market-resolution, or personal-strategy questions."
+version: 1.2.0
 author: Skill package maintainers
 license: Apache-2.0
 metadata:
   hermes:
-    tags: [research, synthesis, forecasting, bayesian-analysis, historical-analogy, html-artifact, visualization]
+    tags: [research, synthesis, forecasting, superforecasting, bayesian-analysis, prediction-markets, forecast-ledger, html-artifact]
     category: research
-    related_skills: [research, academic-research-synthesis, frontend-design, obsidian]
+    related_skills: [research, academic-research-synthesis, polymarket, frontend-design]
 ---
 
 # Historical Bayesian HTML Briefing
 
-Use this skill when an analysis needs more than a summary: mechanism-based historical analogies, explicit uncertainty, visible Bayesian updates, scenario probabilities, and optionally a self-contained interactive HTML dossier.
+Use this for serious prediction work: resolvable questions, explicit probabilities, visible base rates, evidence updates, market comparisons, versioned ledgers, and a complete forecast package.
 
-The goal is not fake precision. The goal is disciplined uncertainty: expose base rates, evidence, likelihood ratios, scenario assumptions, caveats, and update triggers clearly enough that a reader can challenge the model.
+## Default Deliverable Contract
 
-## When to Use
+For any serious or open-ended forecast, produce the full package by default unless the requester explicitly asks for a quick answer, no artifact, or no HTML. Do not decide on your own to skip the artifact because the question is broad.
 
-Use for prompts like:
+A complete package means:
+- a forecastable question or scenario set with horizon and resolution rule;
+- a machine-readable JSON ledger saved to disk;
+- outside-view/base-rate evidence and current sources;
+- probabilities computed or normalized with `scripts/forecast_math.py` or another tool, never mentally;
+- `scripts/validate_forecast.py` run successfully on the ledger;
+- a self-contained HTML briefing rendered with `scripts/render_forecast_html.py`, hand-polished if needed, then verified with `scripts/verify_html_briefing.py`;
+- a final terminal summary that includes headline probabilities, validation status, and exact file paths.
 
-- "What happens historically in this kind of situation?"
-- "Give me possible outcomes with percent chances."
-- "Use Bayesian updating."
-- "Compare this modern technical, economic, political, or organizational problem to older historical cases."
-- "Turn this research into an interactive HTML briefing, dossier, field report, or map."
+If the requester explicitly opts out of HTML or wants only a quick gut check, say that the full package was intentionally skipped and do not pretend the forecast is ledger-backed.
 
-Do not use this for simple summaries, one-off current-fact lookups, or narrow code tasks that do not need historical comparison or probabilistic forecasting.
+## Workflow
 
-## Prerequisites
+Follow the steps in order; load only the reference needed for the current step. The workflow is not complete until the ledger and HTML verification commands have succeeded, unless the requester explicitly opted out.
 
-- Access to the source material being analyzed: article, transcript, paper, policy, market event, interview, notes, or dataset.
-- A way to calculate probabilities with code or a calculator. Do not do Bayesian arithmetic by mental math.
-- Optional: a user-selected notes or wiki directory for saving source notes, raw transcripts, analysis markdown, and HTML artifacts.
-- Optional: a browser or HTML preview tool if the deliverable is interactive.
+For strategic/product competition forecasts ("what are my odds against X?", "what if I achieve every goal?"), also use `references/strategic-competition-forecasting.md` to split head-to-head, diagonal wedge, reputation, startup, and personal-only outcomes.
 
-Load companion skills/tools as needed:
+When maintaining or auditing this skill's default artifact behavior, consult `references/strict-html-default-lesson.md`; it captures the failure mode where a serious forecast stopped at prose and the corrected objective function for package-first delivery.
 
-- `research` for source gathering and synthesis.
-- `academic-research-synthesis` when papers or scholarly fields matter.
-- `frontend-design` when producing polished HTML.
-- `obsidian` or the user's preferred note system skill when writing into a local knowledge base.
+When optimizing this skill itself, consult `references/package-first-skill-optimization.md`; it defines the package-first objective function, trigger eval shape, score-only selection rule, and the pitfall that prose success can hide artifact failure.
 
-## Procedure
+1. Define the forecast question and ledger object: `references/01-question-and-ledger.md`.
+2. Gather outside-view/base-rate evidence: `references/02-research-and-base-rates.md`.
+3. Compute probabilities with code: `references/03-probability-modeling.md` and `scripts/forecast_math.py`.
+4. Validate the machine-readable ledger: `scripts/validate_forecast.py`.
+5. Render the HTML artifact: `references/04-html-briefing-pattern.md`, `scripts/render_forecast_html.py`, then hand-polish any placeholder sections.
+6. Verify the final HTML with `scripts/verify_html_briefing.py` and confirm there are no accidental external assets.
+7. Update, score, and post-mortem resolved forecasts: `references/05-updates-scoring-and-calibration.md`.
 
-### 1. Define the system, not just the topic
+For “what happens if I compete with X?” strategy questions, also use `references/competitive-strategy-forecast.md`: split head-to-head, diagonal/niche, and reputational outcomes instead of collapsing them into one success probability.
 
-Identify the moving parts before choosing analogies:
+## Hard Rules
 
-- the surplus, scarce resource, or bottleneck flow;
-- the ruling or allocation center;
-- bottleneck actors with leverage;
-- excluded, lower-status, or under-rewarded actors;
-- capital owners, customers, shareholders, or dependents;
-- state, legal, regulatory, or coercive actors;
-- competitors, outside raiders, substitutes, or alternative supply paths.
+- Use tools/scripts for arithmetic, Bayesian updates, normalization, Brier/log scores, and market deltas. Do not do forecast math mentally.
+- Preserve forecast history. New evidence creates a new update entry; it does not overwrite the old belief state.
+- Treat prediction-market prices as baselines and attention signals, not truth.
+- Keep overlapping event probabilities separate from mutually exclusive scenario probabilities.
+- Label outputs as forecasting/analysis, not financial advice.
+- Do not stop after a prose forecast for serious/open-ended questions. Prose is the summary of the package, not the deliverable.
+- HTML is default, not optional, when this skill is invoked for serious forecasting. The requester may opt out; the agent may not silently opt out.
+- Keep new forecasts in `status: draft` with `human_approved: false` unless the requester explicitly asks to publish/activate the forecast. Do not infer approval just because the requester requested a forecast package.
+- After any post-render ledger edit, either re-render the HTML from the ledger or explicitly synchronize the embedded `<script id="forecast-data">` JSON and visible status fields before verification. A verified page can still be semantically stale if the embedded ledger was not updated.
+- When an evidence item depends on multiple URLs, do not put a human phrase like `url1 and url2` inside one `href`. Split into separate links in the polished HTML or store separate source fields/notes so verification does not bless malformed links.
+- If the rendered HTML still contains generator placeholders, hand-polish those sections before verification and final delivery.
+- Before claiming completion, run both ledger validation and HTML verification and report the real results.
 
-For historical analogy, compare functions rather than aesthetics. A modern supply-chain choke point is not literally a grain route, guild, mine, port, railroad, or arsenal, but it may share the same causal role: concentrated leverage over a strategic flow.
-
-### 2. Capture sources and caveats
-
-Before forecasting, separate:
-
-- what the source explicitly claims;
-- what is corroborated elsewhere;
-- what is inferred;
-- what remains uncertain or contested;
-- which actors have incentives to exaggerate, minimize, or obscure the facts.
-
-If creating durable notes, keep raw source notes separate from analysis so later readers can audit the chain from source to interpretation.
-
-### 3. Build a historical analogue set
-
-Use a compact but diverse case set. Include old history when it shares the mechanism:
-
-- royal, state, temple, or military workshops;
-- guild cities and protected craft monopolies;
-- mines, extraction camps, and frontier labor systems;
-- peasant, artisan, or skilled-labor scarcity conflicts;
-- navies, armies, arsenals, and strategic labor corps;
-- ports, rail, coal, telecom, power, logistics, semiconductors, or other network chokepoints;
-- conglomerate, chaebol, keiretsu, national-champion, or state-capital restructuring.
-
-For each analogue capture:
-
-- chokepoint;
-- grievance or stressor;
-- ruling-center response;
-- outcome;
-- what maps to the present system;
-- what does not map.
-
-### 4. Separate event probabilities from dominant scenarios
-
-Events can overlap, so they do not need to sum to 100%. Examples:
-
-- selective concessions;
-- legal, state, or managerial containment;
-- institutional reform;
-- automation, substitution, redundancy, or de-chokepointing;
-- structural breakup, firewalling, or reallocation;
-- major disruption, strike, conflict, default, or system failure.
-
-Dominant scenarios should be mutually exclusive over a stated horizon, such as 0-6 months, 0-24 months, or 2-5 years. Normalize only the mutually exclusive scenario set.
-
-### 5. Use explicit Bayesian math
-
-Use code, a spreadsheet, or a calculator for arithmetic.
-
-Recommended base-rate smoothing:
-
-```text
-prior p = (k + 1) / (n + 2)
-odds = p / (1 - p)
-posterior odds = prior odds * LR1 * LR2 * ...
-posterior p = posterior odds / (1 + posterior odds)
-```
-
-Where:
-
-- `n` = analogue cases considered;
-- `k` = cases where the event appeared;
-- `LR` = likelihood ratio for modern evidence.
-
-Use small, legible likelihood ratios unless evidence is unusually strong:
-
-- 0.7-0.9: weak negative evidence;
-- 1.1-1.4: weak or moderate positive evidence;
-- 1.5-2.5: strong positive evidence;
-- 3.0+: direct, high-quality, outcome-specific evidence.
-
-Always label the result as a transparent toy calibration, not a proven factual forecast.
-
-### 6. Explain the outcome logic plainly
-
-For each scenario include:
-
-- percent chance;
-- what it looks like in concrete terms;
-- historical pattern;
-- why it is plausible here;
-- why it may fail;
-- what new evidence would update probability upward or downward.
-
-The output should feel like a map a reader can reason with, not an oracle.
-
-### 7. Build the HTML briefing when requested
-
-When asked for HTML, create a self-contained local file. Avoid external asset dependencies unless the user explicitly wants them.
-
-Prefer a context-native aesthetic over generic software-dashboard styling: archival dossier, industrial field report, annotated map, court ledger, machine-room schematic, war-room notebook, or institutional case file.
-
-Useful interactive sections:
-
-- scenario selector cards;
-- probability bars;
-- Bayesian workbench with evidence toggles;
-- causal flow diagram;
-- historical analogue filter deck;
-- actor map;
-- update-trigger section;
-- source and caveat appendix.
-
-Use `references/html-briefing-pattern.md` as the checklist.
-
-### 8. Verify before completion
-
-For HTML artifacts:
-
-- verify the file exists and has nonzero size;
-- check required section IDs and navigation anchors;
-- check for unintended external `src=` or `href=` dependencies;
-- confirm scenario and evidence data exist if JavaScript interactivity is expected;
-- if saving into a knowledge base, update its index/log according to that knowledge base's convention and read back the updates.
-
-From the skill directory, run the bundled verifier when practical:
+## Script Quick Start
 
 ```bash
-python3 scripts/verify_html_briefing.py /path/to/briefing.html --ids outcomes,bayes,flow,history,actors,triggers,sources
+SKILL_DIR="${SKILL_DIR:-$HOME/.hermes/skills/research/historical-bayesian-html-briefing}"
+python "$SKILL_DIR/scripts/scaffold_forecast.py" --question "Will ... by YYYY-MM-DD?" --horizon-end YYYY-MM-DD --resolution-source URL --output forecast.json
+python "$SKILL_DIR/scripts/forecast_math.py" bayes --prior 0.35 --lr 1.2 --lr 0.8
+python "$SKILL_DIR/scripts/validate_forecast.py" forecast.json
+python "$SKILL_DIR/scripts/render_forecast_html.py" forecast.json --output forecast.html
+# Hand-polish forecast.html so flow/history/actors/triggers contain forecast-specific content.
+python "$SKILL_DIR/scripts/verify_html_briefing.py" forecast.html --ids overview,outcomes,bayes,flow,history,actors,triggers,sources,ledger --require-forecast-data
 ```
 
-## Pitfalls
+## Verification
 
-- Do not flatten history into a cute metaphor. State what maps and what does not.
-- Do not let overlapping event probabilities sum to 100 unless they are explicitly mutually exclusive.
-- Do not use precise percentages without showing model inputs.
-- Do not confuse event probability with dominant-scenario probability.
-- Do not treat source claims as verified facts; preserve caveats and source incentives.
-- Do not bury the conclusion under methodology. Give the answer first, then show the math.
-- Do not make an HTML artifact depend on external fonts, scripts, or CDNs unless requested.
-- Do not include private local paths, raw personal notes, secrets, unpublished client/employer context, or session transcripts in a public briefing package.
+Before claiming completion: validate the ledger, verify generated HTML, confirm no accidental external assets, check that no placeholder copy remains in required sections, and if saved in a private knowledge base, update and read back that knowledge base's index/log according to its convention.
 
-## Verification Checklist
-
-Before claiming the work is complete:
-
-- The historical analogue set is mechanism-based, not aesthetic.
-- Sources, caveats, and assumptions are visible.
-- Bayesian arithmetic was performed with a tool, spreadsheet, or code.
-- Event probabilities and mutually exclusive scenarios are clearly separated.
-- Update triggers are concrete enough to change future odds.
-- Any HTML artifact passes static checks for required IDs, anchors, file size, and external dependencies.
+Completion line should include:
+- JSON ledger path and validation `ok` result;
+- HTML path and verification `ok` result;
+- required IDs present: `overview,outcomes,bayes,flow,history,actors,triggers,sources,ledger`;
+- whether the forecast is `draft`, `active`, `frozen`, `resolved`, or intentionally quick/no-artifact.
